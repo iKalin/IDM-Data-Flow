@@ -1,0 +1,6 @@
+framework module Pods_IDMDataFlow {
+  umbrella header "Pods-IDMDataFlow-umbrella.h"
+
+  export *
+  module * { export * }
+}

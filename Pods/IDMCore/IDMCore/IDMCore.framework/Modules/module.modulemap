@@ -1,0 +1,10 @@
+framework module IDMCore {
+  umbrella header "IDMCore.h"
+
+  export *
+  module * { export * }
+}
+
+module IDMCore.Swift {
+    header "IDMCore-Swift.h"
+}
