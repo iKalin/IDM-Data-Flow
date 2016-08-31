@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2FF4443A6899A44BD9EA8AE31C7F8E0C"
-               BuildableName = "Pods_ModelLayer.framework"
-               BlueprintName = "Pods-ModelLayer"
+               BlueprintIdentifier = "D4AB6B1451D1FABCFB083C160C665748"
+               BuildableName = "Pods_DataLayer.framework"
+               BlueprintName = "Pods-DataLayer"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2FF4443A6899A44BD9EA8AE31C7F8E0C"
-            BuildableName = "Pods_ModelLayer.framework"
-            BlueprintName = "Pods-ModelLayer"
+            BlueprintIdentifier = "D4AB6B1451D1FABCFB083C160C665748"
+            BuildableName = "Pods_DataLayer.framework"
+            BlueprintName = "Pods-DataLayer"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

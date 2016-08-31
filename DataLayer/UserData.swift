@@ -12,9 +12,10 @@ import IDMCore
 
 public final class UserData: NSObject, DataProtocol {
     
-    public func request(parameters parameters:[String: AnyObject]? = nil , completion: DataCompletionClosure? = nil) {
+    public func request(parameters parameters:[String: AnyObject]? = nil , completion: DataCompletionClosure? = nil) -> (()->())?{
         let apiPath = "https://api.github.com/search/users?q=apple"
-        Alamofire.request(.GET, apiPath).responseJSON { (response) in
+        let request = Alamofire.request(.GET, apiPath)
+            request.responseJSON { (response) in
             var success = true
             var data: [String: AnyObject]? = nil
             var error: NSError? = nil
@@ -28,6 +29,10 @@ public final class UserData: NSObject, DataProtocol {
             defer {
                 completion?(success, data, error)
             }
+        }
+        
+        return {
+            request.cancel()
         }
     }
 }

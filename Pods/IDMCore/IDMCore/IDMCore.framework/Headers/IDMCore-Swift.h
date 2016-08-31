@@ -97,10 +97,12 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
+@class SingleDataLayer;
 @class NSError;
 
 SWIFT_CLASS("_TtC7IDMCore17CompoundDataLayer")
 @interface CompoundDataLayer : NSObject
+@property (nonatomic, copy) NSArray<SingleDataLayer *> * _Nonnull subDataLayers;
 
 /// Default is false, sub layers' requests will be called independence & result will be combined by compoundData(_:) function. Set this property is true: sub layers' requests will be called interdependence. Output of prevoius layer will be input of next layer.
 @property (nonatomic) BOOL interdependence;
@@ -109,7 +111,8 @@ SWIFT_CLASS("_TtC7IDMCore17CompoundDataLayer")
 ///
 /// \returns  new instance of DataLayer
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-- (void)requestWithParameters:(NSDictionary<NSString *, id> * _Nullable)parameters completion:(void (^ _Nullable)(BOOL, NSDictionary<NSString *, id> * _Nullable, NSError * _Nullable))completion;
+- (nonnull instancetype)initWithDataLayers:(NSArray<SingleDataLayer *> * _Nonnull)dataLayers OBJC_DESIGNATED_INITIALIZER;
+- (void (^ _Nullable)(void))requestWithParameters:(NSDictionary<NSString *, id> * _Nullable)parameters completion:(void (^ _Nullable)(BOOL, NSDictionary<NSString *, id> * _Nullable, NSError * _Nullable))completion;
 
 /// Override this method to return a compound data for compound layer. Only need when interdependence = false.
 ///
@@ -130,7 +133,7 @@ SWIFT_CLASS("_TtC7IDMCore17CompoundDataLayer")
 SWIFT_CLASS("_TtC7IDMCore15SingleDataLayer")
 @interface SingleDataLayer : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-- (void)requestWithParameters:(NSDictionary<NSString *, id> * _Nullable)parameters completion:(void (^ _Nullable)(BOOL, NSDictionary<NSString *, id> * _Nullable, NSError * _Nullable))completion;
+- (void (^ _Nullable)(void))requestWithParameters:(NSDictionary<NSString *, id> * _Nullable)parameters completion:(void (^ _Nullable)(BOOL, NSDictionary<NSString *, id> * _Nullable, NSError * _Nullable))completion;
 @end
 
 #pragma clang diagnostic pop

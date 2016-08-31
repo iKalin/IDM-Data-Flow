@@ -1,10 +1,12 @@
 PODS:
   - Alamofire (3.4.1)
-  - IDMCore (0.1.10)
+  - IDMCore (0.3.0):
+    - SwiftTask (~> 5.0)
   - MBProgressHUD (1.0.0)
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
+  - SwiftTask (5.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
@@ -14,9 +16,10 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
-  IDMCore: a9817e5ccd0d6f1dcad339fe6fc7c8230db36134
+  IDMCore: 3772af3c9914709d5e02552f2931eb3449f7f6a2
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
+  SwiftTask: 7fcd92f8ac16876e82c0e4ced0cea7e028456b6b
 
 PODFILE CHECKSUM: 06f4d6ed13b4d5ef136f194acc6eced9d869f55c
 

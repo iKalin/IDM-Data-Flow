@@ -86,8 +86,10 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
   install_framework "${PODS_ROOT}/IDMCore/IDMCore/IDMCore.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftTask/SwiftTask.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
   install_framework "${PODS_ROOT}/IDMCore/IDMCore/IDMCore.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftTask/SwiftTask.framework"
 fi

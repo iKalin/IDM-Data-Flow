@@ -12,7 +12,7 @@ import IDMCore
 import IntegrationLayer
 import ModelLayer
 
-class UsersDataAdapter: DefaultDataBinding<Users>, UITableViewDataSource {
+class UsersDataAdapter: DefaultDataBinding<[String : AnyObject],Users>, UITableViewDataSource {
     
     required init() {}
     
