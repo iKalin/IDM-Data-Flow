@@ -9,12 +9,8 @@
 import Foundation
 import SDWebImage
 import IDMCore
-import IntegrationLayer
-import ModelLayer
 
-class UsersDataAdapter: DefaultDataBinding<[String : AnyObject],Users>, UITableViewDataSource {
-    
-    required init() {}
+class UsersDataAdapter: NSObject, DataBindingProtocol, UITableViewDataSource {
     
     weak var tableView: UITableView? {
         didSet {
@@ -24,7 +20,7 @@ class UsersDataAdapter: DefaultDataBinding<[String : AnyObject],Users>, UITableV
     var users:[User] = []
     
     
-    override func bindingData(parameters: [String : AnyObject]?, data: Users?) {
+    func bindingData(_ parameters: String?, data: Users?) {
         defer {
             self.tableView?.reloadData()
         }
@@ -36,21 +32,21 @@ class UsersDataAdapter: DefaultDataBinding<[String : AnyObject],Users>, UITableV
     }
     
     // MARK: - TableView
-    @objc func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    @objc func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    @objc func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
     }
     
-    @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+    @objc func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let user = users[indexPath.row]
         
-        let url = NSURL(string: user.avatarUrl!)
+        let url = URL(string: user.avatarUrl!)
         let imageView = cell.viewWithTag(1) as? UIImageView
-        imageView?.sd_setImageWithURL(url)
+        imageView?.sd_setImage(with: url)
         
         let titleLabel = cell.viewWithTag(2) as? UILabel
         titleLabel?.text = user.userName

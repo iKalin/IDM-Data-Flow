@@ -9,22 +9,21 @@
 import Foundation
 import MBProgressHUD
 import IDMCore
-import IntegrationLayer
 
 extension UIView: CanPresentLoadingView {
     public func presentLoadingView() {
-        MBProgressHUD.showHUDAddedTo(self, animated: true)
+        MBProgressHUD.showAdded(to: self, animated: true)
     }
     
     public func dismissLoadingView() {
-        MBProgressHUD.hideHUDForView(self, animated: true)
+        MBProgressHUD.hide(for: self, animated: true)
     }
 }
 
 extension UIViewController : CanPresentErrorAlert {
-    public func presentErrorAlert(error: NSError?) {
-        let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
+    public func presentErrorAlert(_ error: Error?) {
+        let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
