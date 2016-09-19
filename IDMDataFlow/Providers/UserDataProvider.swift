@@ -10,11 +10,11 @@ import Foundation
 import Alamofire
 import IDMCore
 
-class UserDataProvider: DataProviderProtocol {
+struct UserDataProvider: DataProviderProtocol {
     
     func request(parameters: String?, completion: ((Bool, [String: AnyObject]?, Error?) -> ())?) -> (() -> ())? {
         
-        let query = parameters ?? "apple"
+        let query = parameters ?? "abc"
         
         let apiPath = "https://api.github.com/search/users?q=\(query)"
         let request = Alamofire.request(apiPath, method: .get )
@@ -23,15 +23,15 @@ class UserDataProvider: DataProviderProtocol {
             var data: [String: AnyObject]? = nil
             var error: NSError? = nil
             
+            defer {
+                completion?(success, data, error)
+            }
+            
             let value = response.result.value
             guard value != nil else {
                 return
             }
             data = value as? [String: AnyObject]
-            
-            defer {
-                completion?(success, data, error)
-            }
         }
         
         return {

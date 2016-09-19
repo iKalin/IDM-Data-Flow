@@ -39,11 +39,14 @@ class UsersViewController: UIViewController , UITableViewDataSource {
             integrator.prepareCall(parameters: "congnc").onBeginning({
                 MBProgressHUD.showAdded(to: self.view, animated: true)
             }).onSuccess({ (users) in
+                
                 self.users = users?.items ?? []
-                self.tableView.reloadData()
             }).onError({ (error) in
+                
                 print("Error: \(error)")
-            }).onCompletion({ 
+            }).onCompletion({
+                
+                self.tableView.reloadData()
                 MBProgressHUD.hide(for: self.view, animated: true)
             }).call()
             
