@@ -21,7 +21,7 @@ extension UIView: CanPresentLoadingView {
 }
 
 extension UIViewController : CanPresentErrorAlert {
-    public func presentErrorAlert(_ error: Error?) {
+    public func presentAlert(error: Error?) {
         let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: nil))
         self.present(alert, animated: true, completion: nil)

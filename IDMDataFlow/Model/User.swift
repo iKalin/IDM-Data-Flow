@@ -13,7 +13,7 @@ public class Users: ModelProtocol {
     
     public var items: [User]?
     
-    public required init(data: [String : AnyObject]?) {
+    public required init(from data: [String : AnyObject]?) {
         guard data != nil else {return}
         guard let items = data!["items"] as? [[String: AnyObject]] else {
             return
@@ -21,7 +21,7 @@ public class Users: ModelProtocol {
         var users:[User] = []
         
         for item in items {
-            let u = User(data: item)
+            let u = User(from: item)
             users.append(u)
         }
         self.items = users
@@ -29,11 +29,12 @@ public class Users: ModelProtocol {
 }
 
 public class User: ModelProtocol {
+
     public var userName: String?
     public var avatarUrl: String?
     public var homeUrl: String?
     
-    public required init(data: [String : AnyObject]?) {
+    public required init(from data: [String : AnyObject]?) {
         guard data != nil else {return}
         
         let userName = data!["login"] as? String

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-//swift 3: 1.0.0
+//swift 3 | v1.2.0
 //! Project version number for IDMCore.
 FOUNDATION_EXPORT double IDMCoreVersionNumber;
 

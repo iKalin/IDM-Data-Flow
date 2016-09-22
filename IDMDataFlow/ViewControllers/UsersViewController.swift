@@ -21,7 +21,7 @@ class UsersViewController: UIViewController , UITableViewDataSource {
     @IBInspectable var loadStyle: Int = 1
     @IBOutlet weak var tableView: UITableView!
     
-    var integrator = Integrator(dataProvider: UserDataProvider(), modelType: Users.self)
+    var integrator = MagicalIntegrator(dataProvider: UserDataProvider(), modelType: Users.self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
