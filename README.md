@@ -29,7 +29,7 @@ pod 'IDMCore'
 
 **1. Create a Data provider to fetch data**
 
-A Data provider conforms `DataProviderProtocol`. You need implement `request` method to get data, which specify input parameters type and ouput data type. This also return a closure, which can cancel request.
+A Data provider conforms `DataProviderProtocol`. You need implement `request` method to request data, which specify input parameters type and ouput data type. This also return a closure, which can cancel request.
 
 ```swift
 func request(parameters: <#input_type#>?, completion: ((Bool, <#output_type#>?, Error?) -> ())?) -> (() -> ())?
@@ -65,7 +65,7 @@ struct UserDataProvider: DataProviderProtocol {
 
 **2. Create a Model**
 
-A Model conforms `ModelProtocol`. You maybe implement `init(from:)` method to parse data.
+A Model conforms `ModelProtocol`. You need implement `init(from:)` method to parse data.
 ```swift
 init?(from data: <#input_data_type#>?)
 ```
@@ -171,7 +171,7 @@ class APIClient {
 }
 ```
 
-You can see it is quite cool & easy to use. It also is right about functionally. But wait a bit... With `APIClient`, you put request code and parse code together. This leads you can hardly write unit tests for only the requesting data. If has an error occurred with this API method, you will have to determine where the error occurred, data from requesting isn't correct or parsing doesn't work right. A good idea would be to separate the parsing data out and return the original data from the server. This means that each call api to be accompanied by a call parsing data before using. That's something you never want to do when you integrate it into your application. Your code is not friendly for use and not look nice.
+You can see it is quite cool & easy to use. It also is right about functionally. But wait a bit... With `APIClient`, you put request code and parse code together. This leads you can hardly write unit tests for only the requesting data. If has an error occurred with this API method, you will have to determine where the error occurred, data from requesting isn't correct or parsing doesn't work right. A good idea would be to separate the parsing data out and return the original data from the server. This means that each api call to be accompanied by a parsing data call before using. That's something you never want to do when you integrate it into your application. Your code is not friendly for use and not look nice.
 
 With IDMCore, I use Data provider for requesting data. Data provider has *dynamic input type* and *dynamic output type*, so you can specify any type you want. You should complete provider with original data.  Model should contain method to parse data for itself. And Integrator like a synthesis of all these things and take out what you need. OK. From here, you can write unit tests for requesting data, for parsing data, for integration. All became clear, right?
 
@@ -184,7 +184,7 @@ With IDMCore, I use Data provider for requesting data. Data provider has *dynami
 let integrator = AmazingIntegrator(dataProvider: DataProvider2() >>>> DataProvider1())
 ```
 
-* **Group Data Provider**: Create a Sequence Data Provider if you want to request data from many sources and combine all output when all requests finished (All requests is asynchronous). Output of Group provider is a tuple data of all outputs from sub-providers. Using operator `>><<` to create Group provider:
+* **Group Data Provider**: Create a Group Data Provider if you want to request data from many sources and combine all outputs when all requests finished (All requests is asynchronous). Output of Group provider is a tuple data of all outputs from sub-providers. Using operator `>><<` to create Group provider:
 ```swift
 let integrator2 = AmazingIntegrator(dataProvider: DataProvider1() >><< DataProvider2())
 ```
@@ -206,7 +206,7 @@ Example:
 
 ##### *Next integration call*
 
-An integration call is created when you use `prepareCall` of an `Integrator` to integrate data flow . 
+An integration call is created when you use `prepareCall` method of an `Integrator` to integrate data flow . 
 Ordering the works that integration call do: `onBeginning` -> `onSuccess` ***or*** `onError` -> `onCompletion`.
 **IDMCore** supports "**next integration call**" to an integration call continues calling to an another integration call when finished.
 
@@ -214,7 +214,7 @@ Ordering the works that integration call do: `onBeginning` -> `onSuccess` ***or*
 * `nextError` call after `onError`
 * `nextCompletion` call after `onCompletion`
 * `fowardSuccess` call an another integration call after `onSuccess` with paramter is result in `onSuccess`
-* `forwardError` call an another integration call with after `onError` paramter is result in `onError`
+* `forwardError` call an another integration call after `onError` with paramter is result in `onError`
 * `thenRecall` call an another integration call after `onCompletion` with ***same Model type***. Both use `onBeginning`, `onSuccess`, `onError`, `onCompletion`
 
 *This may be useful when you want to preload data from cache before requesting server:*
